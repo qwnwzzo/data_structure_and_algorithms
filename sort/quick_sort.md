@@ -1,3 +1,4 @@
+## Java Version
 ```Java
 public class Solution {
     public void quickSort(int[] array) {
@@ -16,13 +17,12 @@ public class Solution {
     }
 
     public int partition(int[] array, int left, int right, int pivot){
-        // [1, 7, 1, 1, 1, 7, 9]
         while(left <= right){
-            while(left <= right && array[left] < pivot){
+            while(array[left] < pivot){
                 left++;
             }
 
-            while(left <= right && array[right] > pivot){
+            while(array[right] > pivot){
                 right--;
             }
 
@@ -44,6 +44,7 @@ public class Solution {
 }
 ```
 
+## Python Version
 ```python
 class Solution():
     def quick_sort(self, arr):
@@ -61,10 +62,10 @@ class Solution():
 
     def partition(self, arr, start, end, pivot):
         while start <= end:
-            while start <= end and arr[start] < pivot:
+            while arr[start] < pivot:
                 start += 1
 
-            while start <= end and arr[end] > pivot:
+            while arr[end] > pivot:
                 end -= 1
 
             if start <= end:
