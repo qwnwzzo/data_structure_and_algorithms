@@ -67,18 +67,18 @@ class Solution{
             return result;
         }
 
-        Stack<Integer> stack = new Stack<>();
-        TreeNode curt = root;
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode curr = root;
 
-        while(curt != null || !stack.isEmpty()){
-            while(curt != null){
-                stack.push(curt);
-                curt = curt.left;
+        while(curr != null || !stack.isEmpty()){
+            while(curr != null){
+                stack.push(curr);
+                curr = curr.left;
             }
 
-            curt = stack.pop();
-            result.add(curt.val);
-            curt = curt.right;
+            curr = stack.pop();
+            result.add(curr.val);
+            curr = curr.right;
         }
 
         return result;

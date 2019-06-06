@@ -18,9 +18,9 @@ class Solution{
             return;
         }
 
-        result.add(node.val);
         traverse(root.left, result);
         traverse(root.right, result);
+        result.add(node.val);
     }
 
     public List<Integer> preorderTraverse(TreeNode root){
@@ -43,9 +43,9 @@ class Solution{
         List<Integer> rightResult = traverse(node.right);
 
         List<Integer> result = new ArrayList<>();
-        result.add(node.val);
         result.addAll(leftResult);
         result.addAll(rightResult);
+        result.add(node.val);
 
         return result;
     }
@@ -74,18 +74,19 @@ class Solution{
             TreeNode node = stack.pop();
             result.add(node.val);
 
-            // push right child
-            if(node.right != null){
-                stack.push(node.right);
+            if(root.left != null){
+                stack.push(root.left);
             }
 
-            // push left child
-            if(node.left != null){
-                stack.push(node.left);
+            if(root.right != null){
+                stack.push(root.right);
             }
         }
+        
 
-        return result;
+        Collections.reverse(result);
+
+        return;
     }
 }
 ```
