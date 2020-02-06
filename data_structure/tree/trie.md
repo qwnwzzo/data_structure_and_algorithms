@@ -1,64 +1,58 @@
 ## Trie (Prefix Tree)
 
-```Java
-class TrieNode{
-    private TrieNode[] children;
-    public boolean hasWord;
-    
-    public TrieNode() {
-        children = new TrieNode[26];
-        hasWord = false;
-    }
-    
-    public void insert(String word, int index) {
-        if (index == word.length()) {
-            this.hasWord = true;
-            return;
-        }
-        
-        int pos = word.charAt(index) - 'a';
-        if (children[pos] == null) {
-            children[pos] = new TrieNode();
-        }
-        children[pos].insert(word, index + 1);
-    }
-    
-    public TrieNode find(String word, int index) {
-        if (index == word.length()) {
-            return this;
-        }
-        
-        int pos = word.charAt(index) - 'a';
-        if (children[pos] == null) {
-            return null;
-        }
-        return children[pos].find(word, index + 1);
-    }
-}
+```Python
+class TrieNode(object):
+    def __init__(self):
+        self.children = {}
+        self.is_word = False
 
-class Trie {
-    private TrieNode root;
+class Trie(object):
 
-    /** Initialize your data structure here. */
-    public Trie() {
-        root = new TrieNode();
-    }
+    def __init__(self):
+        """
+        Initialize your data structure here.
+        """
+        self.root = TrieNode()
+
+    def insert(self, word):
+        """
+        Inserts a word into the trie.
+        :type word: str
+        :rtype: None
+        """
+        node = self.root
+        for c in word:
+            if c not in node.children:
+                node.children[c] = TrieNode()
+            node = node.children[c]
+        
+        node.is_word = True
     
-    /** Inserts a word into the trie. */
-    public void insert(String word) {
-        root.insert(word, 0);
-    }
-    
-    /** Returns if the word is in the trie. */
-    public boolean search(String word) {
-        TrieNode node = root.find(word, 0);
-        return (node != null && node.hasWord);
-    }
-    
-    /** Returns if there is any word in the trie that starts with the given prefix. */
-    public boolean startsWith(String prefix) {
-        TrieNode node = root.find(prefix, 0);
-        return node != null;
-    }
-}
+    def find(self, word):
+        node = self.root
+        for c in word:
+            if c not in node.children:
+                return None
+            node = node.children[c]
+        
+        return node
+
+    def search(self, word):
+        """
+        Returns if the word is in the trie.
+        :type word: str
+        :rtype: bool
+        """
+        node = self.find(word)
+        return node is not None and node.is_word
+        
+
+    def startsWith(self, prefix):
+        """
+        Returns if there is any word in the trie that starts with the given prefix.
+        :type prefix: str
+        :rtype: bool
+        """
+        node = self.find(prefix)
+        return node is not None
 ```
